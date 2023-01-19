@@ -10,10 +10,9 @@ npm install
 window에서 아래의 명령을 실행하여 `images`폴더를 생성한다.
 ```
 mkdir images
-
 ```
 
-코드를 실행한다.
+코드실행전에 `//사용자정의:`부분의 파라메터를 확인하고 코드를 실행한다.
 ```
 node index.js
 ```
