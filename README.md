@@ -8,6 +8,7 @@ npm install
 
 ## 실행방법
 ```
+mkdir images
 node index.js
 ```
 
