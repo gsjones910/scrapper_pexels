@@ -7,8 +7,14 @@ npm install
 ```
 
 ## 실행방법
+window에서 아래의 명령을 실행하여 `images`폴더를 생성한다.
 ```
 mkdir images
+
+```
+
+코드를 실행한다.
+```
 node index.js
 ```
 
