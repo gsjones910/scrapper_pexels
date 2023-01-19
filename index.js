@@ -74,9 +74,15 @@ async function main() {
 
     await browser.close();
 
+    var dir = `./images/${search_title}`;
+
+    if (!fs.existsSync(dir)) {
+        fs.mkdirSync(dir);
+    }
+
     for (let i = 0; i < imageLists.length; i++) {
         const element = imageLists[i];
-        downloadImage(element, `./images/${search_title + i}.jpg`)
+        downloadImage(element, `./images/${search_title}/${search_title + i}.jpg`)
     }
 };
 
