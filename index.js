@@ -1,13 +1,17 @@
 const fs = require('fs');
 const client = require('https');
 const puppeteer = require("puppeteer");
+
 //사용자정의: 검색어 수정
-var search_title = "bmw"
+const search_title = "bmw"
+//사용자정의: w=1200을 수정하여(900, 800 등) 다운 받을수 있음.
+const image_size = 1200;
+//사용자정의: 이부분의 시간을 조종하여 더 많은 이미지를 다운받을수 있음.
+const timeout = 60000 * 3; // 3min
 
 async function autoScroll(page) {
-    await page.evaluate(async () => {
+    await page.evaluate(async (timeout) => {
         await new Promise((resolve, reject) => {
-            const timeout = 60000; // 60 seconds
             var totalHeight = 0;
             var distance = 80;
             var timer = setInterval(() => {
@@ -21,13 +25,12 @@ async function autoScroll(page) {
                 }
             }, 1000);
 
-            //사용자정의: 이부분의 시간을 조종하여 더 많은 이미지를 다운받을수 있음.
             setTimeout(() => {
                 clearInterval(timer)
                 resolve();
-            }, timeout * 3);
+            }, timeout);
         });
-    });
+    }, timeout);
 }
 
 const outTime = 10000; // 10 seconds
@@ -59,18 +62,17 @@ async function main() {
 
     await autoScroll(page);
 
-    const imageLists = await page.evaluate(async () => {
+    const imageLists = await page.evaluate(async (image_size) => {
         var imgList = []
         const images = document.querySelectorAll(".spacing_noMargin__Q_PsJ.MediaCard_image__ljFAl");
         images.forEach((element) => {
             var src = element.getAttribute("src")
             const myArray = src.split("&");
 
-            //사용자정의: w=1200을 수정하여(900, 800 등) 다운 받을수 있음.
-            imgList.push(myArray[0] + "&cs=tinysrgb&w=1200")
+            imgList.push(myArray[0] + "&cs=tinysrgb&w="+ image_size)
         })
         return imgList
-    });
+    }, image_size);
 
     await browser.close();
 
