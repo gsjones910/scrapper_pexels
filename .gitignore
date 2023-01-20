@@ -3,5 +3,6 @@
 # dependencies
 /node_modules
 /images
+/urls
 .package-lock.json
 package-lock.json

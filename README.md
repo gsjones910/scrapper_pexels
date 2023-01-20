@@ -7,9 +7,10 @@ npm install
 ```
 
 ## 실행방법
-window에서 아래의 명령을 실행하여 `images`폴더를 생성한다.
+window에서 아래의 명령을 실행하여 `images`와 `urls`폴더를 생성한다.
 ```
 mkdir images
+mkdir urls
 ```
 
 코드실행전에 `//사용자정의:`부분의 파라메터를 확인하고 코드를 실행한다.
