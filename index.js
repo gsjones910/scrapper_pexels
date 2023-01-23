@@ -1,13 +1,10 @@
 const fs = require('fs');
-const client = require('https');
 const puppeteer = require("puppeteer");
+require('dotenv').config()
 
-//사용자정의: 검색어 수정/architecture/interior/food
-const search_title = "food"
-//사용자정의: w=1200을 수정하여(900, 800 등) 다운 받을수 있음.
-const image_size = 1200;
-//사용자정의: 이부분의 시간을 조종하여 더 많은 이미지를 다운받을수 있음.
-const timeout = 60000 * 30; // 3min
+const search_title = process.env.SEARCH_TITLE
+const image_size = process.env.IMAGE_SIGE
+const timeout = process.env.TIMEOUT
 
 async function autoScroll(page) {
     await page.evaluate(async (timeout) => {
@@ -31,30 +28,6 @@ async function autoScroll(page) {
             }, timeout);
         });
     }, timeout);
-}
-
-const outTime = 10000; // 10 seconds
-const options = {
-    outTime
-};
-
-function downloadImage(url, filepath) {
-    return new Promise((resolve, reject) => {
-        try {
-            client.get(url, options, (res) => {
-                if (res.statusCode === 200) {
-                    res.pipe(fs.createWriteStream(filepath))
-                        .on('error', reject)
-                        .once('close', () => resolve(filepath));
-                } else {
-                    res.resume();
-                    reject(new Error(`Request Failed With a Status Code: ${res.statusCode}`));
-                }
-            });
-        } catch (error) {
-            reject(new Error(`Request Failed`));
-        }
-    });
 }
 
 async function main() {
@@ -81,19 +54,8 @@ async function main() {
 
     await browser.close();
 
-    var dir = `./images/${search_title}`;
-
-    if (!fs.existsSync(dir)) {
-        fs.mkdirSync(dir);
-    }
-
     let data = JSON.stringify(imageLists, null, 4);
     fs.writeFileSync(`./urls/${search_title}.json`, data);
-
-    for (let i = 0; i < imageLists.length; i++) {
-        const element = imageLists[i];
-        downloadImage(element, `./images/${search_title}/${search_title + i}.jpg`)
-    }
 };
 
 main()
