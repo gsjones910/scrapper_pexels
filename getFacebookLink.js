@@ -32,7 +32,7 @@ async function main() {
 
     const browser = await puppeteer.launch({ headless: false });
     const page = await browser.newPage();
-    await page.goto("https://www.facebook.com/media/set/?set=a.463390225809082&type=3");
+    await page.goto("https://www.facebook.com/containerhacker/photos");
     await page.setViewport({ width: 1960, height: 1080 });
 
     await autoScroll(page);
