@@ -37,7 +37,7 @@ async function main() {
                 var src = image[0].getAttribute("src")
                 return src
             });
-            await downloadImage(imageSrc, `./images/facebook/${2624 + i}.jpg`)
+            await downloadImage(imageSrc, `./images/facebook/${i}.jpg`)
         } catch (error) {
             imageList.push(link);
         }
