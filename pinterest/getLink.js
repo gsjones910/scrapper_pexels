@@ -5,7 +5,7 @@ require('dotenv').config()
 const path = './urls/pinterest-link.json';
 
 const scrapURLs = [
-    // "https://www.pinterest.jp/pin/132856257748973662/",
+    // "https://www.pinterest.jp/pin//",
 ];
 
 const timeout = 60000;
