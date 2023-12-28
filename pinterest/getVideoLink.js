@@ -71,9 +71,6 @@ async function main() {
                     const videoUrl = match[1];
                     const outUrl = videoUrl.replace("/hls/", "/720p/").replace(".m3u8", ".mp4");
                     videoLinks.push(outUrl);
-                    console.log(`비디오 링크: ${outUrl}`);
-                } else {
-                    console.error('비디오 URL을 찾을 수 없습니다.');
                 }
             }
 
