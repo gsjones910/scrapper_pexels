@@ -1,7 +1,7 @@
 const fs = require('fs');
 const Axios = require('axios')
 
-const folder = 'curtain_wall';
+const folder = '';
 
 const path = './urls/pinterest-link.json';
 let linksData = fs.readFileSync(path);
@@ -32,8 +32,9 @@ async function main() {
     }
 
     for (const [i, link] of links.entries()) {
+        let index = 1 + i
         try {
-            await downloadImage(link, `${imageFolderPath}/${folder+`_`+i}.jpg`)
+            await downloadImage(link, `${imageFolderPath}/${folder + `_` + index}.jpg`)
         } catch (error) {
             console.log(error);
             imageList.push(link);

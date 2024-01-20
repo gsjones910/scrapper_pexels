@@ -1,7 +1,7 @@
 const fs = require('fs');
 const Axios = require('axios');
 
-const folder = 'hair';
+const folder = '';
 const path = './urls/pinterest-video.json';
 
 let linksData = fs.readFileSync(path);
@@ -32,8 +32,9 @@ async function main() {
     }
 
     for (const [i, link] of links.entries()) {
+        let index = 1 + i
         try {
-            await downloadVideo(link, `${videoFolderPath}/${folder + `_` + i}.mp4`)
+            await downloadVideo(link, `${videoFolderPath}/${folder + `_` + index}.mp4`)
         } catch (error) {
             console.log(error);
             videoList.push(link);
