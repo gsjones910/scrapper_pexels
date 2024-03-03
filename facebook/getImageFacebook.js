@@ -3,9 +3,9 @@ const puppeteer = require("puppeteer");
 const Axios = require('axios')
 require('dotenv').config()
 
-const url = "https://www.facebook.com/sheldydservin/photos"
-const fileName = "sheldydservin"
-const timeout = 60000 * 10
+const url = "https://www.facebook.com/modernhousedesigns365/photos"
+const fileName = "modernhousedesigns365"
+const timeout = 60000 * 30
 
 async function downloadImage(url, fileName) {
     try {
