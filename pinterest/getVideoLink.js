@@ -50,8 +50,8 @@ async function main() {
             await autoScroll(page);
 
             const tempLinks = await page.evaluate(async () => {
-                var imgList = []
-                const links = document.querySelectorAll("div > div:nth-child(1) > div > div > div > div > div > div:nth-child(1) > a");
+                var imgList = []                
+                const links = document.querySelectorAll("div > div > div > div > div > span > div > div > div > div > div > a");
                 links.forEach(async (element) => {
                     var src = "https://www.pinterest.jp" + element.getAttribute("href")
                     imgList.push(src)
