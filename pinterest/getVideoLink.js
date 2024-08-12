@@ -51,7 +51,7 @@ async function main() {
 
             const tempLinks = await page.evaluate(async () => {
                 var imgList = []                
-                const links = document.querySelectorAll("div > div > div > div > div > span > div > div > div > div > div > a");
+                const links = document.querySelectorAll("div > div > div > div > div > div > div > div > div > div > div > a");
                 links.forEach(async (element) => {
                     var src = "https://www.pinterest.jp" + element.getAttribute("href")
                     imgList.push(src)
@@ -61,16 +61,20 @@ async function main() {
 
             let videoLinks = []
             for (const [i, link] of tempLinks.entries()) {
-                const response = await Axios({ method: 'GET', url: link, responseType: 'text' });
-                if (!response.status === 200) {
-                    throw new Error(`HTTP error ${response.status}`);
-                }
-                const body = response.data;
-                const match = body.match(/<video.*?src=["'](.*?)["']/i);
-                if (match && match[1]) {
-                    const videoUrl = match[1];
-                    const outUrl = videoUrl.replace("/hls/", "/720p/").replace(".m3u8", ".mp4");
-                    videoLinks.push(outUrl);
+                try {
+                    const response = await Axios({ method: 'GET', url: link, responseType: 'text' });
+                    if (!response.status === 200) {
+                        throw new Error(`HTTP error ${response.status}`);
+                    }
+                    const body = response.data;
+                    const match = body.match(/<video.*?src=["'](.*?)["']/i);
+                    if (match && match[1]) {
+                        const videoUrl = match[1];
+                        const outUrl = videoUrl.replace("/hls/", "/720p/").replace(".m3u8", ".mp4");
+                        videoLinks.push(outUrl);
+                    }
+                } catch (error) {
+                    
                 }
             }
 

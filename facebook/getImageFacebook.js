@@ -3,8 +3,8 @@ const puppeteer = require("puppeteer");
 const Axios = require('axios')
 require('dotenv').config()
 
-const url = "https://www.facebook.com/architecturematter/photos"
-const fileName = "interior"
+const url = "https://www.facebook.com/tinyhousetop/photos_by"
+const fileName = "tinyhousetop"
 const amount = 2000
 
 async function downloadImage(url, fileName) {
